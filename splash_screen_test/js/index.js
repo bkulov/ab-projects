@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var statusbarTransparency = true;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -27,6 +29,19 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        
+        var showButton = document.getElementById("showButton");
+        showButton.addEventListener("click", function() {
+            navigator.splashscreen.show();
+            
+            setTimeout(function(){navigator.splashscreen.hide()}, 5000);
+        });
+        
+        var transparentStatusBarButton = document.getElementById("transparentStatusBarButton");
+        transparentStatusBarButton.addEventListener("click", function() {
+            StatusBar.overlaysWebView(statusbarTransparency);
+            statusbarTransparency = !statusbarTransparency;
+        });
     },
     // deviceready Event Handler
     //
@@ -35,6 +50,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         navigator.splashscreen.hide();
+        //navigator.splashscreen.show();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
