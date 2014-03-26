@@ -17,6 +17,7 @@
  * under the License.
  */
 var statusbarTransparency = true;
+var statusbarVisible = true;
 
 var app = {
     // Application Constructor
@@ -41,6 +42,17 @@ var app = {
         transparentStatusBarButton.addEventListener("click", function() {
             StatusBar.overlaysWebView(statusbarTransparency);
             statusbarTransparency = !statusbarTransparency;
+        });
+
+        var showStatusBarButton = document.getElementById("showStatusBarButton");
+        showStatusBarButton.addEventListener("click", function() {
+            if (statusbarVisible) {
+                StatusBar.hide();
+            } else {
+                StatusBar.show();
+            }
+
+            statusbarVisible = !statusbarVisible;
         });
     },
     // deviceready Event Handler
